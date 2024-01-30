@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Honk&display=swap')
+%font-honk
+    font-family: 'Honk', system-ui
+    
+%font-caveat
+    font: 1.8em 'Caveat', cursive
+
+#root
+    margin:0
+    padding:0
+    display: grid
+    justify-content: center
+    justify-items: center
+
+    .btn
+        @extend %font-honk
+    .new-item-form
+        width: 33vw
+        height: 10vh
+        display: inherit
+        align-content: center
+        justify-content: center
+            
+        #item
+            margin: 5px 0
+            padding: 5px
+    
+    .list
+        label
+            @extend %font-caveat
+        
