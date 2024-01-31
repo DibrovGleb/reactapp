@@ -6,8 +6,8 @@ import Example from './components/example';
 export default function App(){
   return (
     <>
-    <Example/>
-    {/* <Canvas/> */}
+    {/* <Example/> */}
+    <Canvas/>
     {/* <Todo/> */}
     </>
   )

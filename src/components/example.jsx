@@ -10,7 +10,7 @@ export default function Example() {
   });
 
   return (
-    <div style={{height:'100px'}}>
+    <div style={{}}>
       <Element/>
       <p>Вы нажали {count} раз</p>
       <button onClick={() => setCount(count + 1)}>
