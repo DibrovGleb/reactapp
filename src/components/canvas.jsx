@@ -61,57 +61,52 @@ const Canvas = () => {
    }      
 
    function createRect () {
-      return [...Array(4)].map(()=>Math.round(Math.random()*30)+20)
-   }      
-   function createRect2 () {
-      r.push([...Array(4)].map(()=>Math.round(Math.random()*30)+20).concat([...Array(2)].map(()=>Math.random().toFixed(2))))
-      console.log(r)
+      r.push([...Array(4)].map(()=>Math.round(Math.random()*30)+15).concat([...Array(2)].map(()=>Number((Math.random()*1.5).toFixed(2)))).concat(getRandomColor()))
    }
-   const r =[]
-   const  ref = useRef(),
-          r1 = createRect(),
-          r2 = createRect()
-         
-   r1.push(getRandomColor())
-   r2.push(getRandomColor())
+   const r =[],
+         ref = useRef()
+
 
    useEffect(() => {
       const canvas = ref.current,
             pen = canvas.getContext('2d')
-      let [dx1,dy1,dx2,dy2]=[1.5,1.5,1,1]
       canvas.width = window.innerWidth/1.5
-      canvas.height = window.innerHeight/3
-      
+      canvas.height = window.innerHeight/2
+
       const draw = ()=>{
          //pen.clearRect(0, 0, canvas.width, canvas.height)
          // !count ? console.log(false) : console.log(true)
          pen.fillStyle = "rgba(255, 255, 255, 0.1)";
          pen.fillRect(0, 0, canvas.width, canvas.height);
-         //for (let i = 0; i < array.length; i++) {
-            //
-         //}
-         pen.fillStyle = r1[4]
-         if(r1[0] > canvas.width-r1[2] || r1[0] < 0) dx1=-dx1, r1[4] = getRandomColor()
-         if(r1[1] > canvas.height-r1[3] || r1[1] < 0) dy1=-dy1, r1[4] = getRandomColor()
-         pen.fillRect(r1[0]+=dx1, r1[1]+=dy1, r1[2], r1[3])
-
-         if(r2[0] > canvas.width-r2[2] || r2[0] < 0) dx2=-dx2
-         if(r2[1] > canvas.height-r2[3] || r2[1] < 0) dy2=-dy2
-         pen.fillStyle = r2[4]
-         pen.fillRect(r2[0]+=dx2, r2[1]+=dy2, r2[2], r2[3])
+         for (let i = 0; i < r.length; i++) {
+            pen.fillStyle = r[i][6]
+            if(r[i][0] > canvas.width-r[i][2] || r[i][0] < 0) r[i][4]=-r[i][4], r[i][6] = getRandomColor()
+            if(r[i][1] > canvas.height-r[i][3] || r[i][1] < 0) r[i][5]=-r[i][5], r[i][6] = getRandomColor()
+            pen.beginPath()
+            pen.arc(r[i][0], r[i][1], 5, 0, 2 * Math.PI);
+            pen.arc(r[i][0]+r[i][2], r[i][1], 5, 0, 2 * Math.PI);
+            pen.fill();
+            pen.fillRect(r[i][0]+=r[i][4], r[i][1]+=r[i][5], r[i][2], r[i][3])
+         }
          requestAnimationFrame(draw)
       }
       
       window.addEventListener('resize', ()=> canvas.width = window.innerWidth/1.5,
-      canvas.height = window.innerHeight/3)
+      canvas.height = window.innerHeight/2)
       draw()
    }, [])
 
 
    return (<>
    <canvas ref={ref}/>
-   <button onClick={()=> {ref.current.getContext('2d').clearRect(0, 0, ref.current.width, ref.current.height)}}>Clear</button>
-   <button onClick={()=> createRect2()}>Add</button>
+   <div className="btn-container">
+      {/* <button onClick={()=> {ref.current.getContext('2d').clearRect(0, 0, ref.current.width, ref.current.height)}}>Clear</button> */}
+      <button onClick={()=> createRect()}>Add</button>
+      <button onClick={()=> {for (let i = 0; i < 10; i++) 
+         createRect()}}>Add 10</button>
+      <button onClick={()=> r.shift()}>Delete</button>
+      <button onClick={()=> r.length = 0}>Delete all</button>
+   </div>
    </>
    )
 }
