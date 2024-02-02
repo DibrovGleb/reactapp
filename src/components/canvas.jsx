@@ -82,10 +82,6 @@ const Canvas = () => {
             pen.fillStyle = r[i][6]
             if(r[i][0] > canvas.width-r[i][2] || r[i][0] < 0) r[i][4]=-r[i][4], r[i][6] = getRandomColor()
             if(r[i][1] > canvas.height-r[i][3] || r[i][1] < 0) r[i][5]=-r[i][5], r[i][6] = getRandomColor()
-            pen.beginPath()
-            pen.arc(r[i][0], r[i][1], 5, 0, 2 * Math.PI);
-            pen.arc(r[i][0]+r[i][2], r[i][1], 5, 0, 2 * Math.PI);
-            pen.fill();
             pen.fillRect(r[i][0]+=r[i][4], r[i][1]+=r[i][5], r[i][2], r[i][3])
          }
          requestAnimationFrame(draw)

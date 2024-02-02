@@ -7,8 +7,6 @@ canvas
 
     @for $i from 1 through 4
         button:nth-child(#{$i})
-            background: darken(#a2ffff, $i * 8%)
-            color: #111111
             box-shadow: -6+$i*3-1+px 3px 3px #646464b2
     button
         margin: 5px
@@ -16,6 +14,7 @@ canvas
         border: 2px ridge black
         font: 15px bold 
         border-radius: 5px
+        background: #ffff
         cursor: pointer
         transition: background 0.2s linear,transform 0.2s ease-in-out, opacity 0.5s linear, box-shadow 0.5s,border 0.3s ease-in-out
         &:hover
